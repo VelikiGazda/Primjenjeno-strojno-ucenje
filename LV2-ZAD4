@@ -1,0 +1,21 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def crnobijela_img(kvadrat_velicina, broj_kvadrata_h, broj_kvadrata_w):
+    crni_kvadrat = np.zeros((kvadrat_velicina, kvadrat_velicina))
+    bijeli_kvadrat = np.ones((kvadrat_velicina, kvadrat_velicina)) * 255
+    rows = []
+    for i in range(broj_kvadrata_h):
+        row = []
+        for j in range(broj_kvadrata_w):
+            if (i+j) % 2 == 0:
+                row.append(crni_kvadrat)
+            else:
+                row.append(bijeli_kvadrat)
+        rows.append(np.hstack(row))
+    img = np.vstack(rows)
+    return img.astype('uint8')
+
+generated_img = crnobijela_img(50, 4, 5)
+plt.imshow(generated_img, cmap='gray', vmin=0, vmax=255)
+plt.show()
